@@ -290,3 +290,114 @@ int main() {
 //有一种香，材质不均匀，每一根但是燃烧完恰好是一个小时，
 //给你两根香，确定一个15分钟的时间段
 
+
+
+void left_move(char* arr, int k) {
+	assert(arr!=NULL);
+	int len = strlen(arr);
+	int i = 0;
+	for (i = 0; i < k;i++) {
+		char temp = *arr;
+		int j = 0;
+		for (j = 0; j < len - 1; j++) {
+			*(arr + j) = *(arr+j + 1);
+		}
+		*(arr+len - 1) = temp;
+	}
+
+}
+
+
+void Reversal(char * arr,int s,int k) {
+	assert(arr != NULL);
+	assert(s<=k);
+	int len = strlen(arr);
+	int left = s;
+	int right = k-1;
+	int i = 0;
+	while (left < right) {
+		char temp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = temp;
+		left++;
+		right--;
+	}
+}
+
+int is_left_move(char* s1,char* s2) {
+	int i = 0;
+	int len = strlen(s1);
+	for (i = 0; i < len;i++) {
+		left_move(s1, 1);
+		int ret=strcmp(s1, s2);
+		if (ret==0) {
+			return 1;
+		}
+	
+	}
+	return 0;
+}
+
+int main() {
+
+	char arr[] = "abcdefg";
+	char s1[] = "AABCD";
+	char s2[] = "AABCD";
+
+	//暴力求解法
+	//left_move(arr,2);
+	
+	//三步反转法
+	/*int len = strlen(arr);
+	Reversal(arr, 0, 2);
+	Reversal(arr, 2, len);
+	Reversal(arr, 0, len);*/
+
+	int ret=is_left_move(s1,s2);
+	if (ret==1) {
+		printf("Yes!");
+	}
+	else {
+		printf("No!");
+
+	}
+
+	//追加一个相同的串，判断另一个是不是子串
+	//abcdefabcdef   
+
+
+
+	/*int len1 = strlen(s1);
+	int i = 0;
+	int result = 0;
+	for (i = 0; i < len1-1; ) {
+		Reversal(s1, 0, i);
+		Reversal(s1, i, len1);
+		Reversal(s1, 0, len1);
+		result++;
+		if (s1==s2) {
+			printf("%s是由s1经过旋转得到的。\n", s1); break;
+		}
+		
+	}*/
+
+
+	//printf("请输入要旋转几位字符：");
+	//int k = 0;
+	//scanf("%d", &k);
+	//char* start = arr;
+	//int sz = sizeof(arr) / sizeof(arr[0]);
+	//char* end = (char *)(start + sz);
+	//while (k) {
+	//	*(end + 1) = '\0';
+	//	char temp = arr[*(start)];
+	//	arr[*(start)] = arr[*(end)];
+	//	arr[*(end)] = temp;
+	//	start++;
+	//	end++;
+	//	k--;
+	/*}*/
+	//printf("%s\n",arr);
+
+	return 0;
+}
