@@ -401,3 +401,71 @@ int main() {
 
 	return 0;
 }
+
+int Estimate(char* str1,char* str2) {
+	int len1 = strlen(str1);
+	int len2 = strlen(str2);
+	if (len1 != len2) {
+		return 0;
+	}
+	strncat(str1,str1,len1);   //strcat 和  strncat 的区别 6是追加的个数，前者不能自己追加自己，后者可以
+	char* p=strstr(str1,str2);  //strstr是判断后者是不是前者的子集
+	if (p==NULL) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}
+
+//
+//int main() {
+//	char arr1[30] = "abcdef";
+//	char arr2[] = "cdefab";
+//	int ret=Estimate(arr1,arr2);
+//	if (ret==1)
+//	{
+//		printf("Yes\n");
+//	}
+//	else {
+//		printf("No\n");
+//	}
+//	return 0;
+//}
+
+int findnum(int arr[3][3],int k,int* px,int* py) {
+	int x = 0;
+	int y = *py - 1;
+	while ((x <= *px - 1) && (y >= 0)) {
+		if (k > arr[x][y]) {
+			x++;
+		}
+		else if (k < arr[x][y]) {
+			y--;
+		}
+		else {
+			*px = x;
+			*py = y;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int main() {
+
+	int arr[3][3] = { {1,2,3},{4,7,9},{9,10,14} };
+	int k = 9;
+	int row=3;
+	int col=3;
+	int ret = findnum(arr,k,&row,&col);// row col 返回型参数
+	if (ret==1) {
+		printf("找到了\n");
+		printf("下标是%d %d\n",row,col);
+
+	}
+	else {
+		printf("没找到");
+	}
+	return 0;
+}
