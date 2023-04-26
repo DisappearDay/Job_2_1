@@ -469,3 +469,28 @@ int main() {
 	}
 	return 0;
 }
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+//创建一个结构体类型
+struct People {
+	char name[20];
+	int height;
+};
+int main() {
+	//利用结构体类型创建一个该类型的结构体变量
+	struct People p1 = {"陈宇杰",191};
+	struct People* pb= &p1;
+	//利用pb打印出身高
+	printf("%d\n",(*pb).height );
+	//利用pb打印出身高的简便写法
+	printf("%d\n", pb->height);
+	printf("书名: %s\n", p1.name);
+	printf("身高：%d\n", p1.height);
+	p1.height = 192;
+	printf("修改后的身高为: %d\n", p1.height); 
+	//修改人名，因为人名是个数组，所以需要用到一个函数即strcpy，string copy--字符串拷贝，它里面只有两个成员，一个是目的地（你需要拷贝到哪去），一个是变量（你需要拷贝什么东西）
+	strcpy(p1.name, "孟琦");
+	printf("修改后的人名: %s\n", p1.name);
+	return 0;
+}
